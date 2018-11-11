@@ -1,8 +1,11 @@
 <p>Hallo Welt</p>
 
 <p>Das hier habe ich gefunden: </p>
+{{#each hits}}
 <ul>
-    <li>id: {{id}}</li>
-    <li>Sequence: {{sequence}}</li>
-    <li>Species for you: {{specimen}}</li>
+    <li>id: {{hitId}}</li>
+    <li>def: {{hitDef}}</li>
+    <li>Species for you: {{hitScore}}</li>
 </ul>
+<hr>
+{{/each}}

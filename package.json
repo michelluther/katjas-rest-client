@@ -4,16 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node scripts/compile.js"
+    "start": "node server.js",
+    "test": "jest",
+    "build": "node scripts/compile.js",
+    "develop": "webpack -w",
+    "jest_watcher": "jest --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
     "chokidar": "^2.0.4",
     "eslint": "^5.9.0",
+    "express": "^4.16.4",
     "handlebars": "^4.0.12",
     "handlebars-loader": "^1.7.0",
+    "jest": "^23.6.0",
+    "libxmljs": "^0.19.5",
     "webpack": "^4.25.1"
   },
   "devDependencies": {
