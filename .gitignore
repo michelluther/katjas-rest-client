@@ -2,3 +2,5 @@ node_modules
 client
 package-lock.json
 fasta_db
+bin
+fasta_db.zip

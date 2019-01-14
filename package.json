@@ -28,7 +28,6 @@
     "webpack-cli": "^3.1.2"
   },
   "fasta": {
-    "dbPath":"./fasta_db/allFasta.fsa"
+    "dbPath": "./fasta_db/allFasta.fsa"
   }
-
 }

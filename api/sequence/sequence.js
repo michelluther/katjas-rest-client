@@ -8,36 +8,36 @@ function Sequence(sequenceString) {
 
     this.sequence = sequenceString;
 
-/*
-    this.xmlString = fs.readFileSync(__dirname + '/result.xml', {
-        encoding: 'utf8'
-    })
+    /*
+        this.xmlString = fs.readFileSync(__dirname + '/result.xml', {
+            encoding: 'utf8'
+        })
 
-    this.xmlDoc = libxml.parseXmlString(this.xmlString)
-*/
+        this.xmlDoc = libxml.parseXmlString(this.xmlString)
+    */
     /**
      * @description returns object representation of sequence search
      */
     this.getHits = (dbPath) => {
-  /*      const hits = this.xmlDoc.find('//Hit')
-        _this = this
-        return hits.map(hit => {
-            return {
-                hitId: _this.getHitId(hit),
-                hitDef: _this.getHitDef(hit),
-                hitScore: _this.getHitScore(hit)
-            }
-        });*/
+        /*      const hits = this.xmlDoc.find('//Hit')
+              _this = this
+              return hits.map(hit => {
+                  return {
+                      hitId: _this.getHitId(hit),
+                      hitDef: _this.getHitDef(hit),
+                      hitScore: _this.getHitScore(hit)
+                  }
+              });*/
         return new Promise((resolve, reject) => {
             var query = this.sequence;
             blast.blastN(dbPath, query, function (err, output) {
-                if(!err){
-                    returnArray = output.BlastOutput.BlastOutput_iterations[0].Iteration_hits.map(hit => {
+                if (!err) {
+                    returnArray = output.BlastOutput.BlastOutput_iterations[0].Iteration[0].Iteration_hits[0].Hit.map(hit => {
                         return new Hit({
                             id: hit.Hit_id[0]
                         })
                     })
-                    resolve(output.BlastOutput.BlastOutput_iterations[0].Iteration_hits)
+                    resolve(returnArray)
                     console.log(output);
                 } else {
                     console.log(err)
