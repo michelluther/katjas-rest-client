@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const config = require("./package.json")
 const Sequence = require('./api/sequence/sequence')
 const port = 9000
 
@@ -10,10 +11,15 @@ app.get('/', function (req, res) {
 })
 
 app.get('/api/sequence/:sequence/resemblance', function (req, res) {
-    const hits = new Sequence(req.param('sequence')).getHits()
-    res.send(
-        hits
-    )
+    const dbPath = config.fasta.dbPath
+
+    new Sequence(req.param('sequence')).getHits(dbPath).then((hits) => {
+        let returnArray = hits.map(hit => {
+            return hit.getData()
+        })
+        res.send(returnArray)
+    })
+
 })
 
 app.get('/client/main.js', (req, res) => {

@@ -2,7 +2,7 @@
 
 Klonen, im Verzeichnis dann: `npm install`
 
-Um Webpack zu starten: `webpack -w`
+Um Webpack zu starten: `npm run develop`
 
 Um den Webserver zu starten `http-server`
 

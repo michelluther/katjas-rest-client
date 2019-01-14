@@ -1,27 +1,49 @@
 const fs = require('fs')
 const libxml = require('libxmljs');
+const Hit = require('./../hit/hit')
+const blast = require('blastjs');
 
-function Sequence(id) {
 
+function Sequence(sequenceString) {
+
+    this.sequence = sequenceString;
+
+/*
     this.xmlString = fs.readFileSync(__dirname + '/result.xml', {
         encoding: 'utf8'
     })
 
     this.xmlDoc = libxml.parseXmlString(this.xmlString)
-
+*/
     /**
      * @description returns object representation of sequence search
      */
-    this.getHits = () => {
-        const hits = this.xmlDoc.find('//Hit')
+    this.getHits = (dbPath) => {
+  /*      const hits = this.xmlDoc.find('//Hit')
         _this = this
         return hits.map(hit => {
             return {
-                hitId: _this.getHitId(),
+                hitId: _this.getHitId(hit),
                 hitDef: _this.getHitDef(hit),
                 hitScore: _this.getHitScore(hit)
             }
-        });
+        });*/
+        return new Promise((resolve, reject) => {
+            var query = this.sequence;
+            blast.blastN(dbPath, query, function (err, output) {
+                if(!err){
+                    returnArray = output.BlastOutput.BlastOutput_iterations[0].Iteration_hits.map(hit => {
+                        return new Hit({
+                            id: hit.Hit_id[0]
+                        })
+                    })
+                    resolve(output.BlastOutput.BlastOutput_iterations[0].Iteration_hits)
+                    console.log(output);
+                } else {
+                    console.log(err)
+                }
+            });
+        })
     }
 
     this.getHitScore = (hit) => {
