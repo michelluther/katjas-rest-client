@@ -34,11 +34,22 @@ function Sequence(sequenceString) {
                 if (!err) {
                     returnArray = output.BlastOutput.BlastOutput_iterations[0].Iteration[0].Iteration_hits[0].Hit.map(hit => {
                         return new Hit({
-                            id: hit.Hit_id[0]
+                            id: hit.Hit_accession[0],
+                            len: hit.Hit_len[0],
+                            def: hit.Hit_def[0],
+                            hsp_align_length: hit.Hit_hsps[0].Hsp[0]['Hsp_align-len'][0],
+                            hsp_midline: hit.Hit_hsps[0].Hsp[0].Hsp_midline[0],
+                            hsp_gaps: hit.Hit_hsps[0].Hsp[0].Hsp_gaps[0],
+                            hsp_identity: hit.Hit_hsps[0].Hsp[0].Hsp_identity[0],
+                             hsp_evalue: hit.Hit_hsps[0].Hsp[0].Hsp_evalue[0],
+                             hsp_score: hit.Hit_hsps[0].Hsp[0].Hsp_score[0],
+                             hsp_bit_score: hit.Hit_hsps[0].Hsp[0]['Hsp_bit-score'][0]
                         })
                     })
                     resolve(returnArray)
-                    console.log(output);
+
+                    console.log('test ...')
+                    console.log(returnArray);
                 } else {
                     console.log(err)
                 }
@@ -47,7 +58,7 @@ function Sequence(sequenceString) {
     }
 
     this.getHitScore = (hit) => {
-        return hit.find('.//Hsp_bit-score')[0].text()
+        return hit.find(def.text())
     }
 
     this.getHitDef = (hit) => {

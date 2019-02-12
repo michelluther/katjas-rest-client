@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const config = require("./package.json")
 const Sequence = require('./api/sequence/sequence')
-const port = 9000
+const port = 9001
 
 app.get('/', function (req, res) {
     res.sendFile('index.html', {
@@ -15,7 +15,7 @@ app.get('/api/sequence/:sequence/resemblance', function (req, res) {
 
     new Sequence(req.param('sequence')).getHits(dbPath).then((hits) => {
         let returnArray = hits.map(hit => {
-            return hit.getData()
+            return hit.id
         })
         res.send(returnArray)
     })

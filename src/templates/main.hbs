@@ -3,9 +3,11 @@
 <p>Das hier habe ich gefunden: </p>
 {{#each hits}}
 <ul>
-    <li>id: {{hitId}}</li>
-    <li>def: {{hitDef}}</li>
-    <li>Species for you: {{hitScore}}</li>
+//muss dem in Hit entsprechen danach dann npm run develop in cygwin
+    <li>id: {{getID}}</li>
+    <li>def: {{getLength}}</li>
+    <li>Species for you: {{getDef
+    }}</li>
 </ul>
 <hr>
 {{/each}}
