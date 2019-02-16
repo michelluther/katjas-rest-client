@@ -3,10 +3,15 @@
 <p>Das hier habe ich gefunden: </p>
 {{#each hits}}
 <ul>
-//muss dem in Hit entsprechen danach dann npm run develop in cygwin
-    <li>id: {{getID}}</li>
-    <li>def: {{getLength}}</li>
-    <li>Species for you: {{getDef}}</li>
+    <li>id: {{id}}</li>
+    <li>def: {{def}}</li>
+    <li>hsp_align_length: {{hsp_align_length}}</li>
+    <li>hsp_midline: {{hsp_midline}}</li>
+    <li>hsp_gaps: {{hsp_gaps}}</li>
+    <li>hsp_identity: {{hsp_identity}}</li>
+    <li>hsp_evalue: {{hsp_evalue}}</li>
+    <li>hsp_score: {{hsp_score}}</li>
+    <li>hsp_bit_score: {{hsp_bit_score}} </li>
 </ul>
 <hr>
 {{/each}}

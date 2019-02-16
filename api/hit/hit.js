@@ -1,4 +1,4 @@
-const Hit = function(hitData){
+const Hit = function (hitData) {
     this.data = {
         id: hitData.id,
         length: hitData.len,
@@ -10,18 +10,17 @@ const Hit = function(hitData){
         hsp_evalue: hitData.hsp_evalue,
         hsp_score: hitData.hsp_score,
         hsp_bit_score: hitData.hsp_bit_score
-
-};
-    this.getID = function() {
+    };
+    this.getID = function () {
         return this.data.id
     }
-    this.getLength = function() {
+    this.getLength = function () {
         return this.data.length
     }
-    this.getDef = function() {
+    this.getDef = function () {
         return this.data.def
     }
-    this.getMidline= function() {
+    this.getMidline = function () {
         return this.data.hsp_midline
     }
 }
