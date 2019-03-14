@@ -14,10 +14,12 @@ app.get('/', function (req, res) {
     })
 })
 
-app.get('/api/sequence/:sequence/resemblance', function (req, res) {
+app.get('/api/sequence/sequence', function (request, res) {
+    let sequence = request.query.sequence;
+    let options = request.query.options;
     const dbPath = config.fasta.dbPath
 
-    new Sequence(req.param('sequence')).getHits(dbPath).then((hits) => {
+    new Sequence(sequence, options).getHits(dbPath).then((hits) => {
         let returnArray = hits ? hits.map(hit => {
             return hit.data
         }) : [];
@@ -32,4 +34,4 @@ app.get('/client/main.js', (req, res) => {
     })
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}! dwrewr`))

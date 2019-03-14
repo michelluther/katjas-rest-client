@@ -10,10 +10,10 @@ const blast = require('blastjs');
  * which can be used to do a similarity search using the blastN search program
  * @param {string} sequenceString 
  */
-function Sequence(sequenceString) {
+function Sequence(sequenceString, optionsString) {
 
     this.sequence = sequenceString;
-
+    this.options = optionsString;
     /**
      * @description returns object representation of sequence search
      */
@@ -21,7 +21,8 @@ function Sequence(sequenceString) {
 
         return new Promise((resolve, reject) => {
             var query = this.sequence;
-            blast.blastN(dbPath, query, function (err, output) {
+            var optionString = this.options;
+            blast.blastN(dbPath, query, optionString, function (err, output) {
                 if (!err) {
                     var hits = output.BlastOutput.BlastOutput_iterations[0].Iteration[0].Iteration_hits[0].Hit;
                     if (hits) {
