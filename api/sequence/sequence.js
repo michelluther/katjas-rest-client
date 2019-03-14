@@ -1,17 +1,30 @@
 const Hit = require('./../hit/hit')
 const blast = require('blastjs');
 
+function parseOptions(options) {
+    if (!options) {
+        return '';
+    } else {
+        var optionString = '';
+        if (options.word_size) {
+            optionString += '-word_size=' + parseInt(options.word_size)
+        }
+        return optionString
+    }
+}
 
 /**
  * @class
  * @description A sequence is a sequence like 'TCATTAGAAGAAGTTTCTCGTAAAATTTTCAGTGCACATTTTGGTCAATTAGCAATTATCTTTTTATGGA'
  * which can be used to do a similarity search using the blastN search program
  * @param {string} sequenceString 
+ * @param {object} options
+ * @param {string} options.word_size
  */
-function Sequence(sequenceString, optionsString) {
+function Sequence(sequenceString, options) {
 
     this.sequence = sequenceString;
-    this.options = optionsString;
+    this.optionsString = parseOptions(options)
     /**
      * @description returns object representation of sequence search
      */
@@ -19,7 +32,7 @@ function Sequence(sequenceString, optionsString) {
 
         return new Promise((resolve, reject) => {
             var query = this.sequence;
-            var optionString = this.options;
+            var optionString = this.optionsString;
             blast.blastN(dbPath, query, optionString, function (err, output) {
                 if (!err) {
                     var hits = output.BlastOutput.BlastOutput_iterations[0].Iteration[0].Iteration_hits[0].Hit;

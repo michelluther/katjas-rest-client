@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
 
 app.get('/api/sequence/sequence', function (request, res) {
     let sequence = request.query.sequence;
-    let options = request.query.options;
+    let options = { word_size: request.query.word_size };
     const dbPath = config.fasta.dbPath
 
     new Sequence(sequence, options).getHits(dbPath).then((hits) => {
