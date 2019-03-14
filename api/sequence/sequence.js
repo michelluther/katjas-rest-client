@@ -1,5 +1,3 @@
-const fs = require('fs')
-const libxml = require('libxmljs');
 const Hit = require('./../hit/hit')
 const blast = require('blastjs');
 
